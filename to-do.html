@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>To Do List</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500&display=swap" rel="stylesheet">
+</head>
+<style>
+    * {
+        box-sizing: border-box;
+    }
+
+    .container {
+        width: 100%;
+        padding: 90px 200px;
+        
+    }
+
+    ul {
+        margin: 0;
+        padding: 0;
+    }
+
+    ul li {
+        cursor: pointer;
+        position: relative;
+        padding: 12px 8px 12px 40px;
+        background: pink;
+        font-size: 18px;
+        transition: 0.2s;
+        list-style-type: none;
+        font-family: 'Roboto', sans-serif;
+        color: rgb(44, 44, 44);
+        border-radius: 5px;
+    }
+
+
+    ul li:nth-child(odd) {
+        background: pink;
+    }
+
+    ul li:hover {
+        background: #ddd;
+    }
+
+    ul li.checked {
+        background: rgb(218, 218, 218);
+        color: rgb(119, 119, 119);
+        text-decoration: line-through;
+    }
+
+    ul li.checked::before {
+        content: "";
+        position: absolute;
+        border-color: rgb(70, 192, 76);
+        border-style: solid;
+        border-width: 0 2px 2px 0;
+        top: 10px;
+        left: 16px;
+        transform: rotate(45deg);
+        height: 15px;
+        width: 7px;
+    }
+
+    .close {
+        position: absolute;
+        right: 0;
+        top: 6px;
+        padding: 5px;
+        width: 50px;
+        height: 30px;
+        margin-right: 5px;
+        background: #94c29c;
+        color: #fff;
+        float: left;
+        text-align: center;
+        font-size: 16px;
+        cursor: pointer;
+        border-radius: 8px;
+        font-family: 'Roboto', sans-serif;
+    }
+
+    .close:hover {
+        background-color: rgb(204, 30, 59);
+        color: white;
+    }
+
+    .header {
+        background-color: pink;
+        padding: 30px 40px;
+        color: white;
+        text-align: center;
+        border-radius: 5px;
+    }
+
+    .header:after {
+        content: "";
+        display: table;
+        clear: both;
+    }
+
+    input {
+        margin: 0;
+        border: none;
+        border-radius: 0;
+        width: 75%;
+        padding: 10px;
+        float: left;
+        font-size: 16px;
+    }
+    input:focus{
+        box-shadow: 0 3px 6px 0 rgb(0, 0, 0, 16%);
+        outline: 0;
+    }
+
+    .addBtn {
+        padding: 10px;
+        width: 20%;
+        background: #5fbd6f;
+        color: #fff;
+        float: left;
+        margin-left: 33px;
+        text-align: center;
+        font-size: 16px;
+        cursor: pointer;
+        transition: 0.3s;
+        border-radius: 5px;
+        font-family: 'Roboto', sans-serif;
+    }
+
+    .addBtn:hover {
+        background-color: #48a557;
+    }
+</style>
+
+<body>
+    <div class="container">
+        <div id="myDIV" class="header">
+            <p style="font-size: 45px;">Yapılacaklar Listesi<p>
+            <input type="text" id="myInput" placeholder="Görevleri Yaz...">
+            <span onclick="newElement()" class="addBtn">Ekle</span>
+        </div>
+          
+        <ul id="myUL">
+            <li class="checked">W3Schools Alıştırmaları yapılacak</li>
+            <li>Freecodecamp Alıştırmaları yapılacak</li>
+           
+        </ul>
+    </div>
+
+
+    <script>
+    
+        var myNodelist = document.getElementsByTagName("LI");
+        var i;
+        for (i = 0; i < myNodelist.length; i++) {
+            var span = document.createElement("SPAN"); 
+            var txt = document.createTextNode("\u00D7"); 
+            span.className = "close"; 
+            span.appendChild(txt); 
+            myNodelist[i].appendChild(span); 
+        }
+
+       
+        var close = document.getElementsByClassName("close"); 
+        
+        var i;
+        for (i = 0; i < close.length; i++) {
+            close[i].onclick = function () { 
+                var div = this.parentElement;
+                div.style.display = "none"; 
+            }
+        }
+
+        
+        var list = document.querySelector('ul'); 
+        list.addEventListener('click', function (check) { 
+            if (check.target.tagName === 'LI') {
+                check.target.classList.toggle('checked');  a
+            }
+        }, false);
+
+ 
+        function newElement() {
+            var li = document.createElement("li"); 
+            var inputValue = document.getElementById("myInput").value; 
+            var t = document.createTextNode(inputValue);  
+            li.appendChild(t); 
+            if (inputValue === '') {
+                alert("Görev Yazmadan Ekle Butonuna Basılamaz!..."); 
+            } else {
+                document.getElementById("myUL").appendChild(li); 
+            }
+            document.getElementById("myInput").value = "";
+
+            var span = document.createElement("SPAN");
+            var txt = document.createTextNode("\u00D7");
+            span.className = "close";
+            span.appendChild(txt);
+            li.appendChild(span);
+
+            for (i = 0; i < close.length; i++) {
+                close[i].onclick = function () {
+                    var div = this.parentElement;
+                    div.style.display = "none";
+                }
+            }
+            
+        }
+        
+
+    </script>
+</body>
+
+</html>
